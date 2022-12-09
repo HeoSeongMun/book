@@ -70,6 +70,7 @@ namespace 도서대출관리시스템
             this.button2.TabIndex = 1;
             this.button2.Text = "반납";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // dataGridView1
             // 
@@ -77,6 +78,7 @@ namespace 도서대출관리시스템
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(17, 40);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(548, 169);
             this.dataGridView1.TabIndex = 9;
@@ -151,9 +153,11 @@ namespace 도서대출관리시스템
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Location = new System.Drawing.Point(17, 33);
             this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowTemplate.Height = 23;
             this.dataGridView2.Size = new System.Drawing.Size(548, 171);
             this.dataGridView2.TabIndex = 0;
+            this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
             // 
             // button4
             // 
@@ -163,6 +167,7 @@ namespace 도서대출관리시스템
             this.button4.TabIndex = 7;
             this.button4.Text = "연기";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // groupBox1
             // 
@@ -249,7 +254,7 @@ namespace 도서대출관리시스템
             this.label8.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label8.Location = new System.Drawing.Point(693, 171);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(28, 16);
+            this.label8.Size = new System.Drawing.Size(29, 16);
             this.label8.TabIndex = 12;
             this.label8.Text = "***";
             // 
@@ -300,7 +305,7 @@ namespace 도서대출관리시스템
             this.label10.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label10.Location = new System.Drawing.Point(762, 171);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(113, 16);
+            this.label10.Size = new System.Drawing.Size(114, 16);
             this.label10.TabIndex = 15;
             this.label10.Text = "님 환영합니다!";
             // 

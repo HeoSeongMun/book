@@ -49,3 +49,21 @@ C:\Users\troll\OneDrive\바탕 화면\11월29일C#\book\도서대출관리시스
 C:\Users\troll\OneDrive\바탕 화면\11월29일C#\book\도서대출관리시스템\obj\Debug\도서대출관리시스템.csproj.CopyComplete
 C:\Users\troll\OneDrive\바탕 화면\11월29일C#\book\도서대출관리시스템\obj\Debug\도서대출관리시스템.exe
 C:\Users\troll\OneDrive\바탕 화면\11월29일C#\book\도서대출관리시스템\obj\Debug\도서대출관리시스템.pdb
+C:\Users\sim\Documents\GitHub\book\book\도서대출관리시스템\bin\Debug\도서대출관리시스템.exe.config
+C:\Users\sim\Documents\GitHub\book\book\도서대출관리시스템\bin\Debug\도서대출관리시스템.exe
+C:\Users\sim\Documents\GitHub\book\book\도서대출관리시스템\bin\Debug\도서대출관리시스템.pdb
+C:\Users\sim\Documents\GitHub\book\book\도서대출관리시스템\bin\Debug\Oracle.DataAccess.dll
+C:\Users\sim\Documents\GitHub\book\book\도서대출관리시스템\obj\Debug\도서대출관리시스템.csproj.AssemblyReference.cache
+C:\Users\sim\Documents\GitHub\book\book\도서대출관리시스템\obj\Debug\도서대출관리시스템.admin_main.resources
+C:\Users\sim\Documents\GitHub\book\book\도서대출관리시스템\obj\Debug\도서대출관리시스템.admin_stock.resources
+C:\Users\sim\Documents\GitHub\book\book\도서대출관리시스템\obj\Debug\도서대출관리시스템.admin_book.resources
+C:\Users\sim\Documents\GitHub\book\book\도서대출관리시스템\obj\Debug\도서대출관리시스템.admin_user_management.resources
+C:\Users\sim\Documents\GitHub\book\book\도서대출관리시스템\obj\Debug\도서대출관리시스템.user_main.resources
+C:\Users\sim\Documents\GitHub\book\book\도서대출관리시스템\obj\Debug\도서대출관리시스템.login.resources
+C:\Users\sim\Documents\GitHub\book\book\도서대출관리시스템\obj\Debug\도서대출관리시스템.Properties.Resources.resources
+C:\Users\sim\Documents\GitHub\book\book\도서대출관리시스템\obj\Debug\도서대출관리시스템.user_mypage.resources
+C:\Users\sim\Documents\GitHub\book\book\도서대출관리시스템\obj\Debug\도서대출관리시스템.csproj.GenerateResource.cache
+C:\Users\sim\Documents\GitHub\book\book\도서대출관리시스템\obj\Debug\도서대출관리시스템.csproj.CoreCompileInputs.cache
+C:\Users\sim\Documents\GitHub\book\book\도서대출관리시스템\obj\Debug\도서대출관리시스템.csproj.CopyComplete
+C:\Users\sim\Documents\GitHub\book\book\도서대출관리시스템\obj\Debug\도서대출관리시스템.exe
+C:\Users\sim\Documents\GitHub\book\book\도서대출관리시스템\obj\Debug\도서대출관리시스템.pdb

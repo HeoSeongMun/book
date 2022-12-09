@@ -49,7 +49,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "제목 : ";
+            this.label1.Text = "코드 : ";
             // 
             // textBox1
             // 
@@ -78,12 +78,14 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "검색";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(8, 36);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(384, 200);
             this.dataGridView1.TabIndex = 4;
@@ -137,6 +139,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "user_mypage";
             this.Text = "회원 - 마이페이지";
+            this.Load += new System.EventHandler(this.user_mypage_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

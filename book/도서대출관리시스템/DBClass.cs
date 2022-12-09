@@ -37,7 +37,7 @@ namespace 도서대출관리시스템
         {
             try
             {
-                string connectionString = "User Id=book; Password=book; Data Source=(DESCRIPTION =   (ADDRESS = (PROTOCOL =  TCP)(HOST = localhost)(PORT = 1521))" +
+                string connectionString = "User Id=skkc; Password=6641; Data Source=(DESCRIPTION =   (ADDRESS = (PROTOCOL =  TCP)(HOST = localhost)(PORT = 1521))" +
                         "   (CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = xe)) ); ";
                 string commandString = "select * from book";
                 DA = new OracleDataAdapter(commandString, connectionString);
@@ -53,7 +53,7 @@ namespace 도서대출관리시스템
         {
             try
             {
-                string My_con = "User Id=book; Password=book; Data Source=(DESCRIPTION =   (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521)" +
+                string My_con = "User Id=skkc; Password=6641; Data Source=(DESCRIPTION =   (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521)" +
                     ")   (CONNECT_DATA =     (SERVER = DEDICATED)     (SERVICE_NAME = xe)   ) );";
 
                 Con = new OracleConnection();
