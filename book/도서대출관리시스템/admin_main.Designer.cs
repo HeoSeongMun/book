@@ -163,7 +163,7 @@ namespace 도서대출관리시스템
             this.groupBox3.Size = new System.Drawing.Size(378, 238);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "대여 회원";
+            this.groupBox3.Text = "대여 목록";
             // 
             // dataGridView2
             // 

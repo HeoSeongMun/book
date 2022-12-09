@@ -14,6 +14,10 @@ namespace 도서대출관리시스템
     {
         DBClass dbc = new DBClass();
         string booksql;
+        string bookcntsql;
+        string lentbooksql;
+        string membersql;
+        string lentmemsql;
         public admin_main()
         {
             InitializeComponent();
@@ -39,6 +43,12 @@ namespace 도서대출관리시스템
                 MessageBox.Show(DE.Message);
             }
             booklist();
+            bookcnt();
+            lentbookcnt();
+            membercnt();
+            lentmemcnt();
+            odmemcnt();
+            lentgridview();
         }
         public void booklist()
         {
@@ -103,6 +113,98 @@ namespace 도서대출관리시스템
             }
             dataGridView1.DataSource = dsstr.Tables["book"].DefaultView;
             book_header();
+        }
+        public void sql_execute2(String sqlstr, DataSet dsstr) //총 책 갯수 카운터
+        {
+            dbc.DCom.CommandText = sqlstr;
+            dbc.DA.SelectCommand = dbc.DCom;
+            dbc.DA.Fill(dsstr, "bookcnt");
+            dsstr.Tables["bookcnt"].Clear();
+            dbc.DA.Fill(dsstr, "bookcnt");
+            label3.Text = dsstr.Tables["bookcnt"].Rows.Count.ToString() + "권";
+        }
+        public void bookcnt() //총 책 갯수 카운터(쿼리실행문)
+        {
+            bookcntsql = "select * from book";
+            sql_execute2(bookcntsql, dbc.DS);
+        }
+        public void sql_execute3(String sqlstr, DataSet dsstr) //대여 책 갯수 카운터
+        {
+            dbc.DCom.CommandText = sqlstr;
+            dbc.DA.SelectCommand = dbc.DCom;
+            dbc.DA.Fill(dsstr, "bookcnt");
+            dsstr.Tables["bookcnt"].Clear();
+            dbc.DA.Fill(dsstr, "bookcnt");
+            label7.Text = dsstr.Tables["bookcnt"].Rows.Count.ToString() + "권";
+        }
+        public void lentbookcnt() //대여 책 갯수 카운터(쿼리실행문)
+        {
+            lentbooksql = "select * from book where bo_user is not null";
+            sql_execute3(lentbooksql, dbc.DS);
+        }
+        public void sql_execute4(String sqlstr, DataSet dsstr) //총 회원 카운터
+        {
+            dbc.DCom.CommandText = sqlstr;
+            dbc.DA.SelectCommand = dbc.DCom;
+            dbc.DA.Fill(dsstr, "member");
+            dsstr.Tables["member"].Clear();
+            dbc.DA.Fill(dsstr, "member");
+            label5.Text = dsstr.Tables["member"].Rows.Count.ToString() + "명";
+        }
+        public void membercnt() //총 회원 갯수 카운터(쿼리실행문)
+        {
+            membersql = "select * from usinf";
+            sql_execute4(membersql, dbc.DS);
+        }
+        public void sql_execute5(String sqlstr, DataSet dsstr) //대여 회원 카운터
+        {
+            dbc.DCom.CommandText = sqlstr;
+            dbc.DA.SelectCommand = dbc.DCom;
+            dbc.DA.Fill(dsstr, "lentmem");
+            dsstr.Tables["lentmem"].Clear();
+            dbc.DA.Fill(dsstr, "lentmem");
+            label9.Text = (dsstr.Tables["lentmem"].Rows.Count - 1).ToString() + "명";
+        }
+        public void lentmemcnt() //대여 회원 카운터(쿼리실행문)
+        {
+            lentmemsql = "select bo_user, count(*) from book group by bo_user having count(*) >= 1";
+            sql_execute5(lentmemsql, dbc.DS);
+        }
+        public void sql_execute6(String sqlstr, DataSet dsstr) //연체 회원 카운터
+        {
+            dbc.DCom.CommandText = sqlstr;
+            dbc.DA.SelectCommand = dbc.DCom;
+            dbc.DA.Fill(dsstr, "odmem");
+            dsstr.Tables["odmem"].Clear();
+            dbc.DA.Fill(dsstr, "odmem");
+            label11.Text = dsstr.Tables["odmem"].Rows.Count.ToString() + "명";
+        }
+        public void odmemcnt() //연체 회원 카운터(쿼리실행문)
+        {
+            lentmemsql = "select * from usinf where user_overdue is not null";
+            sql_execute6(lentmemsql, dbc.DS);
+        }
+        public void sql_execute7(String sqlstr, DataSet dsstr) //대여 목록 그리드뷰 출력
+        {
+            dbc.DCom.CommandText = sqlstr;
+            dbc.DA.SelectCommand = dbc.DCom;
+            dbc.DA.Fill(dsstr, "lent");
+            dsstr.Tables["lent"].Clear();
+            dbc.DA.Fill(dsstr, "lent");
+            dataGridView2.DataSource = dsstr.Tables["lent"].DefaultView;
+            lent_header();
+        }
+        public void lent_header()
+        {
+            dataGridView1.Columns[0].HeaderText = "도서코드";
+            dataGridView1.Columns[1].HeaderText = "도서명";
+            dataGridView1.Columns[2].HeaderText = "사용자";
+            dataGridView1.Columns[3].HeaderText = "대여일자";
+        }
+        public void lentgridview() //대여목록 그리드뷰 쿼리문 출력
+        {
+            lentbooksql = "select bo_no, bo_nm, bo_user, bo_lent_date from book where bo_user is not null";
+            sql_execute7(lentbooksql, dbc.DS);
         }
         private void button1_Click(object sender, EventArgs e)
         {
