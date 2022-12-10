@@ -32,6 +32,7 @@ namespace 도서대출관리시스템
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.홈ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.도서관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.재고관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.로그아웃ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -39,9 +40,9 @@ namespace 도서대출관리시스템
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.AppendBtn = new System.Windows.Forms.Button();
+            this.UpdateBtn = new System.Windows.Forms.Button();
+            this.DeleteBtn = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -50,7 +51,6 @@ namespace 도서대출관리시스템
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.재고관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -84,6 +84,13 @@ namespace 도서대출관리시스템
             this.도서관리ToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.도서관리ToolStripMenuItem.Text = "도서 관리";
             this.도서관리ToolStripMenuItem.Click += new System.EventHandler(this.도서관리ToolStripMenuItem_Click);
+            // 
+            // 재고관리ToolStripMenuItem
+            // 
+            this.재고관리ToolStripMenuItem.Name = "재고관리ToolStripMenuItem";
+            this.재고관리ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.재고관리ToolStripMenuItem.Text = "재고관리";
+            this.재고관리ToolStripMenuItem.Click += new System.EventHandler(this.재고관리ToolStripMenuItem_Click);
             // 
             // 로그아웃ToolStripMenuItem1
             // 
@@ -140,32 +147,32 @@ namespace 도서대출관리시스템
             this.textBox3.Size = new System.Drawing.Size(100, 21);
             this.textBox3.TabIndex = 6;
             // 
-            // button1
+            // AppendBtn
             // 
-            this.button1.Location = new System.Drawing.Point(144, 100);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(50, 21);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "추가";
-            this.button1.UseVisualStyleBackColor = true;
+            this.AppendBtn.Location = new System.Drawing.Point(144, 100);
+            this.AppendBtn.Name = "AppendBtn";
+            this.AppendBtn.Size = new System.Drawing.Size(50, 21);
+            this.AppendBtn.TabIndex = 7;
+            this.AppendBtn.Text = "추가";
+            this.AppendBtn.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // UpdateBtn
             // 
-            this.button2.Location = new System.Drawing.Point(200, 100);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(50, 21);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "수정";
-            this.button2.UseVisualStyleBackColor = true;
+            this.UpdateBtn.Location = new System.Drawing.Point(200, 100);
+            this.UpdateBtn.Name = "UpdateBtn";
+            this.UpdateBtn.Size = new System.Drawing.Size(50, 21);
+            this.UpdateBtn.TabIndex = 8;
+            this.UpdateBtn.Text = "수정";
+            this.UpdateBtn.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // DeleteBtn
             // 
-            this.button3.Location = new System.Drawing.Point(256, 100);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(50, 21);
-            this.button3.TabIndex = 9;
-            this.button3.Text = "삭제";
-            this.button3.UseVisualStyleBackColor = true;
+            this.DeleteBtn.Location = new System.Drawing.Point(256, 100);
+            this.DeleteBtn.Name = "DeleteBtn";
+            this.DeleteBtn.Size = new System.Drawing.Size(50, 21);
+            this.DeleteBtn.TabIndex = 9;
+            this.DeleteBtn.Text = "삭제";
+            this.DeleteBtn.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
@@ -241,13 +248,6 @@ namespace 도서대출관리시스템
             this.dataGridView2.Size = new System.Drawing.Size(404, 150);
             this.dataGridView2.TabIndex = 10;
             // 
-            // 재고관리ToolStripMenuItem
-            // 
-            this.재고관리ToolStripMenuItem.Name = "재고관리ToolStripMenuItem";
-            this.재고관리ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
-            this.재고관리ToolStripMenuItem.Text = "재고관리";
-            this.재고관리ToolStripMenuItem.Click += new System.EventHandler(this.재고관리ToolStripMenuItem_Click);
-            // 
             // admin_user_management
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -257,9 +257,9 @@ namespace 도서대출관리시스템
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.DeleteBtn);
+            this.Controls.Add(this.UpdateBtn);
+            this.Controls.Add(this.AppendBtn);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
@@ -294,9 +294,9 @@ namespace 도서대출관리시스템
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button AppendBtn;
+        private System.Windows.Forms.Button UpdateBtn;
+        private System.Windows.Forms.Button DeleteBtn;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label4;

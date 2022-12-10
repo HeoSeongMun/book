@@ -20,15 +20,18 @@ namespace 도서대출관리시스템
         string rtnsql;
         private int SelectedRowIndex;
         private string SelectedRowString;
+        private string SelectedRowStringGrid1;
         login parent;       //login타입의 parent 객체 생성
         DBClass dbc = new DBClass();
         public user_main() //매개 변수없는 기본생성자
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
         public user_main(login loginform) // 로그인 타입의 매개변수를 갖는 생성자
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             parent = loginform;
         }
         public string getID // 유저 마이페이지로 접속 유저 아이디를 전달하는 메서드
@@ -108,12 +111,64 @@ namespace 도서대출관리시스템
         }
         private void button3_Click(object sender, EventArgs e) //대여 버튼
         {
-            DateTime today = DateTime.Today;
-            DialogResult rtyes = MessageBox.Show("해당 도서를 대여하시겠습니까?", "확인", MessageBoxButtons.YesNo);
-            if(rtyes == DialogResult.Yes)
+            if (SelectedRowStringGrid1 == "가능")
+              {
+                DialogResult rtyes = MessageBox.Show("해당 도서를 대여하시겠습니까?", "확인", MessageBoxButtons.YesNo);
+                if (rtyes == DialogResult.Yes)
+                {
+                    lentsql = "Update book Set bo_user = '" + param + "', bo_lent_date = sysdate, bo_rtndate = sysdate+7 where bo_no = '" + SelectedRowIndex + "'";
+                    dbc.DCom.CommandText = lentsql;
+                    dbc.DCom.ExecuteNonQuery();
+                    dbc.DA.SelectCommand = dbc.DCom;
+                    dbc.DA.Fill(dbc.DS, "lent");
+                    dbc.DS.Tables["lent"].Clear();
+                    dbc.DA.Fill(dbc.DS, "lent");
+                    list_search("");
+                    lentlist();
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
             {
-                lentsql = "Update book Set bo_user = '" + param + "', bo_lent_date = sysdate, bo_rtndate = sysdate+7 where bo_no = '" + SelectedRowIndex + "'";
+                MessageBox.Show("이미 대여중인 도서입니다.");
+                return;
+            }         
+        }
+        private void button2_Click(object sender, EventArgs e) //반납 버튼
+        {
+            DialogResult rtyes = MessageBox.Show("해당 도서를 반납하시겠습니까?", "확인", MessageBoxButtons.YesNo);
+            if (rtyes == DialogResult.Yes)
+            {
+                lentsql = "insert into lent(lent_bo_no, bo_nm, lent_user, bo_lent_date, bo_rtndate) select seq_lent.NEXTVAL, bo_nm, bo_user, bo_lent_date, bo_rtndate from book where bo_nm ='" + SelectedRowString+ "'";
                 dbc.DCom.CommandText = lentsql;
+                dbc.DCom.ExecuteNonQuery();
+                dbc.DA.SelectCommand = dbc.DCom;
+
+                rtnsql = "update book set bo_user = null, bo_lent_date = null, bo_rtndate = null where bo_nm = '" + SelectedRowString + "'";
+                dbc.DCom.CommandText = rtnsql;
+                dbc.DCom.ExecuteNonQuery();
+                dbc.DA.SelectCommand = dbc.DCom;
+                dbc.DA.Fill(dbc.DS, "lent");
+                dbc.DS.Tables["lent"].Clear();
+                dbc.DA.Fill(dbc.DS, "lent");
+                list_search("");
+                lentlist();
+            }
+            else
+            {
+                return;
+            }
+        }
+        private void button4_Click(object sender, EventArgs e) //연기 버튼 클릭
+        {
+            DialogResult rtyes = MessageBox.Show("해당 도서 대여를 연장하시겠습니까?", "확인", MessageBoxButtons.YesNo);
+            if (rtyes == DialogResult.Yes)
+            {
+                rtnsql = "update book set bo_rtndate = bo_rtndate + 7 where bo_nm = '" + SelectedRowString + "'";
+                dbc.DCom.CommandText = rtnsql;
                 dbc.DCom.ExecuteNonQuery();
                 dbc.DA.SelectCommand = dbc.DCom;
                 dbc.DA.Fill(dbc.DS, "lent");
@@ -178,6 +233,7 @@ namespace 도서대출관리시스템
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e) //셀 클릭하여 특정 데이터값 추출
         {
+            SelectedRowStringGrid1 = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString(); //내가 선택한 행의 5번째 열의 값 추출
             try
             {
                 DataTable bookTable = dbc.DS.Tables["book"];
@@ -211,27 +267,6 @@ namespace 도서대출관리시스템
             login login = new login();
             login.ShowDialog();
         }
-
-        private void button4_Click(object sender, EventArgs e) //연기 버튼 클릭
-        {
-            DialogResult rtyes = MessageBox.Show("해당 도서 대여를 연장하시겠습니까?", "확인", MessageBoxButtons.YesNo);
-            if (rtyes == DialogResult.Yes)
-            {
-                rtnsql = "update book set bo_rtndate = bo_rtndate + 7 where bo_nm = '" + SelectedRowString + "'";
-                dbc.DCom.CommandText = rtnsql;
-                dbc.DCom.ExecuteNonQuery();
-                dbc.DA.SelectCommand = dbc.DCom;
-                dbc.DA.Fill(dbc.DS, "lent");
-                dbc.DS.Tables["lent"].Clear();
-                dbc.DA.Fill(dbc.DS, "lent");
-                list_search("");
-                lentlist();
-            }
-            else
-            {
-                return;
-            }
-        }
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e) //대여목록 데이터그리드뷰 데이터값 도출
         {
             try
@@ -255,25 +290,8 @@ namespace 도서대출관리시스템
             }
         }
 
-        private void button2_Click(object sender, EventArgs e) //반납 버튼
+        public void insert_lent() // 대출시 lent 테이블 insert 쿼리문 
         {
-            DialogResult rtyes = MessageBox.Show("해당 도서를 반납하시겠습니까?", "확인", MessageBoxButtons.YesNo);
-            if (rtyes == DialogResult.Yes)
-            {
-                rtnsql = "update book set bo_user = null, bo_lent_date = null, bo_rtndate = null where bo_nm = '" + SelectedRowString + "'";
-                dbc.DCom.CommandText = rtnsql;
-                dbc.DCom.ExecuteNonQuery();
-                dbc.DA.SelectCommand = dbc.DCom;
-                dbc.DA.Fill(dbc.DS, "lent");
-                dbc.DS.Tables["lent"].Clear();
-                dbc.DA.Fill(dbc.DS, "lent");
-                list_search("");
-                lentlist();
-            }
-            else
-            {
-                return;
-            }
         }
     }
 }

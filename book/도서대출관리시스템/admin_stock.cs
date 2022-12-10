@@ -122,6 +122,32 @@ namespace 도서대출관리시스템
                 MessageBox.Show(DE.Message);
             }
         }
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                DataTable bookTable = dbc.DS.Tables["ord"];
+                if (e.RowIndex > bookTable.Rows.Count - 1)
+                {
+                    MessageBox.Show("해당하는 데이터가 존재하지 않습니다.");
+                    return;
+                }
+                DataRow currRow = bookTable.Rows[e.RowIndex];
+                textBox4.Text = currRow["ord_no"].ToString();
+                textBox1.Text = currRow["ord_nm"].ToString();
+                textBox2.Text = currRow["ord_auth"].ToString();
+                textBox3.Text = currRow["ord_pub"].ToString();
+                SelectedRowIndex = Convert.ToInt32(currRow["ord_no"]);
+            }
+            catch (DataException DE)
+            {
+                MessageBox.Show(DE.Message);
+            }
+            catch (Exception DE)
+            {
+                MessageBox.Show(DE.Message);
+            }
+        }
         private void 홈ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Visible = false;
@@ -149,31 +175,6 @@ namespace 도서대출관리시스템
             admin_user_management admin_User_Management = new admin_user_management();
             admin_User_Management.ShowDialog();
         }
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                DataTable bookTable = dbc.DS.Tables["ord"];
-                if (e.RowIndex > bookTable.Rows.Count - 1)
-                {
-                    MessageBox.Show("해당하는 데이터가 존재하지 않습니다.");
-                    return;
-                }
-                DataRow currRow = bookTable.Rows[e.RowIndex];
-                textBox4.Text = currRow["ord_no"].ToString();
-                textBox1.Text = currRow["ord_nm"].ToString();
-                textBox2.Text = currRow["ord_auth"].ToString();
-                textBox3.Text = currRow["ord_pub"].ToString();
-                SelectedRowIndex = Convert.ToInt32(currRow["ord_no"]);
-            }
-            catch (DataException DE)
-            {
-                MessageBox.Show(DE.Message);
-            }
-            catch (Exception DE)
-            {
-                MessageBox.Show(DE.Message);
-            }
-        }
+
     }
 }

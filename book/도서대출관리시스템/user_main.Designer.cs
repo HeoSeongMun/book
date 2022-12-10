@@ -80,6 +80,7 @@ namespace 도서대출관리시스템
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(548, 169);
             this.dataGridView1.TabIndex = 9;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
@@ -254,7 +255,7 @@ namespace 도서대출관리시스템
             this.label8.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label8.Location = new System.Drawing.Point(693, 171);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(29, 16);
+            this.label8.Size = new System.Drawing.Size(28, 16);
             this.label8.TabIndex = 12;
             this.label8.Text = "***";
             // 
@@ -305,7 +306,7 @@ namespace 도서대출관리시스템
             this.label10.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label10.Location = new System.Drawing.Point(762, 171);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(114, 16);
+            this.label10.Size = new System.Drawing.Size(113, 16);
             this.label10.TabIndex = 15;
             this.label10.Text = "님 환영합니다!";
             // 
