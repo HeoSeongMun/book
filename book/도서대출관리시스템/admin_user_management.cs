@@ -14,9 +14,11 @@ namespace 도서대출관리시스템
     {
         //수정하거나 삭제하기 위해 선택된 행의 인덱스를 저장한다.
         private int SelectedRowIndex;
+        private string SelectedRowString;
 
         string usersql;
         string oversql;
+        string cancelodsql;
         DBClass dbc = new DBClass();
         public admin_user_management()
         {
@@ -54,17 +56,18 @@ namespace 도서대출관리시스템
         }
         public void over_header()
         {
-            dataGridView2.Columns[0].HeaderText = "제목";
+            /*dataGridView2.Columns[0].HeaderText = "제목";
             dataGridView2.Columns[1].HeaderText = "ID";
             dataGridView2.Columns[2].HeaderText = "대여일";
             dataGridView2.Columns[3].HeaderText = "반납일";
-            dataGridView2.Columns[4].HeaderText = "벌금";
+            dataGridView2.Columns[4].HeaderText = "벌금";*/
+            dataGridView2.Columns[0].HeaderText = "ID";
+            dataGridView2.Columns[1].HeaderText = "성명";
+            dataGridView2.Columns[2].HeaderText = "연체료";
 
             dataGridView2.Columns[0].Width = 60;
             dataGridView2.Columns[1].Width = 60;
             dataGridView2.Columns[2].Width = 100;
-            dataGridView2.Columns[3].Width = 100;
-            dataGridView2.Columns[3].Width = 100;
         }
         public void userlist() //회원목록 조회 쿼리
         {
@@ -73,7 +76,8 @@ namespace 도서대출관리시스템
         }
         public void overlist()  //연체회원 조회 쿼리
         {
-            oversql = "select t1.bo_nm, t1.bo_user, TO_CHAR(t1.bo_lent_date,'yyyy/mm/dd'), TO_CHAR(t1.bo_rtndate,'yyyy/mm/dd'), t2.user_overdue from book t1, usinf t2 where t1.bo_rtndate > sysdate and t1.bo_user = user_id";
+            oversql = "select user_id, user_nm, (to_number(user_overdue)*1500) from usinf where user_overdue > 0";
+            //oversql = "select t1.bo_nm, t1.bo_user, TO_CHAR(t1.bo_lent_date,'yyyy/mm/dd'), TO_CHAR(t1.bo_rtndate,'yyyy/mm/dd'), t2.user_overdue from book t1, usinf t2 where t1.bo_rtndate > sysdate and t1.bo_user = user_id";
             sql_execute2(oversql, dbc.DS);
         }
         public void sql_execute(String sqlstr, DataSet dsstr)    //회원목록 실행
@@ -92,11 +96,11 @@ namespace 도서대출관리시스템
         {
             dbc.DCom.CommandText = sqlstr;
             dbc.DA.SelectCommand = dbc.DCom;
-            dbc.DA.Fill(dsstr, "book");
-            dsstr.Tables["book"].Clear();
-            dbc.DA.Fill(dsstr, "book");
+            dbc.DA.Fill(dsstr, "oduser");
+            dsstr.Tables["oduser"].Clear();
+            dbc.DA.Fill(dsstr, "oduser");
 
-            dataGridView2.DataSource = dsstr.Tables["book"].DefaultView;
+            dataGridView2.DataSource = dsstr.Tables["oduser"].DefaultView;
 
             over_header();
         }
@@ -195,6 +199,26 @@ namespace 도서대출관리시스템
                 MessageBox.Show(DE.Message);
             }
         }
+        private void button1_Click(object sender, EventArgs e) //연체 초기화 버튼
+        {
+            DialogResult rtyes = MessageBox.Show("해당 사용자의 연체 상태를 해제하시겠습니까?", "확인", MessageBoxButtons.YesNo);
+            if (rtyes == DialogResult.Yes)
+            {
+                cancelodsql = "update usinf set user_overdue = '0' where user_id = '" + SelectedRowString + "'";
+                dbc.DCom.CommandText = cancelodsql;
+                dbc.DCom.ExecuteNonQuery();
+                dbc.DA.SelectCommand = dbc.DCom;
+                dbc.DA.Fill(dbc.DS, "oduser");
+                dbc.DS.Tables["oduser"].Clear();
+                dbc.DA.Fill(dbc.DS, "oduser");
+                userlist();
+                overlist();
+            }
+            else
+            {
+                return;
+            }
+        }
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)    // 그리드뷰 셀 선택
         {
             try
@@ -254,6 +278,29 @@ namespace 도서대출관리시스템
             this.Visible = false;
             login Login = new login();
             Login.ShowDialog();
+        }
+
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                DataTable lentTable = dbc.DS.Tables["oduser"];
+                if (e.RowIndex > lentTable.Rows.Count - 1)
+                {
+                    MessageBox.Show("해당하는 데이터가 존재하지 않습니다.");
+                    return;
+                }
+                DataRow currRow = lentTable.Rows[e.RowIndex];
+                SelectedRowString = currRow["user_id"].ToString();
+            }
+            catch (DataException DE)
+            {
+                MessageBox.Show(DE.Message);
+            }
+            catch (Exception DE)
+            {
+                MessageBox.Show(DE.Message);
+            }
         }
     }
 }

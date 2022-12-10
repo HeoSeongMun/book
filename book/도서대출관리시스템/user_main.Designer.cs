@@ -54,6 +54,7 @@ namespace 도서대출관리시스템
             this.마이페이지ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.로그아웃ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -255,7 +256,7 @@ namespace 도서대출관리시스템
             this.label8.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label8.Location = new System.Drawing.Point(693, 171);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(28, 16);
+            this.label8.Size = new System.Drawing.Size(29, 16);
             this.label8.TabIndex = 12;
             this.label8.Text = "***";
             // 
@@ -306,15 +307,24 @@ namespace 도서대출관리시스템
             this.label10.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label10.Location = new System.Drawing.Point(762, 171);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(113, 16);
+            this.label10.Size = new System.Drawing.Size(114, 16);
             this.label10.TabIndex = 15;
             this.label10.Text = "님 환영합니다!";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(648, 171);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(0, 12);
+            this.label11.TabIndex = 16;
             // 
             // user_main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(958, 549);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -366,6 +376,7 @@ namespace 도서대출관리시스템
         private System.Windows.Forms.ToolStripMenuItem 로그아웃ToolStripMenuItem;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
     }
 }
 

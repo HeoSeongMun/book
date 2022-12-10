@@ -52,6 +52,7 @@ namespace 도서대출관리시스템
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -157,6 +158,7 @@ namespace 도서대출관리시스템
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button2);
             this.groupBox3.Controls.Add(this.dataGridView2);
             this.groupBox3.Location = new System.Drawing.Point(607, 112);
             this.groupBox3.Name = "groupBox3";
@@ -171,8 +173,9 @@ namespace 도서대출관리시스템
             this.dataGridView2.Location = new System.Drawing.Point(11, 20);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.Size = new System.Drawing.Size(453, 206);
+            this.dataGridView2.Size = new System.Drawing.Size(453, 183);
             this.dataGridView2.TabIndex = 0;
+            this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
             // 
             // label2
             // 
@@ -275,6 +278,16 @@ namespace 도서대출관리시스템
             this.label11.TabIndex = 9;
             this.label11.Text = "n명";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(375, 210);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(89, 20);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "반납처리";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // admin_main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -334,5 +347,6 @@ namespace 도서대출관리시스템
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button button2;
     }
 }

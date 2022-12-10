@@ -18,9 +18,11 @@ namespace 도서대출관리시스템
         string booksql;
         string lentsql;
         string rtnsql;
+        bool overduebool;
         private int SelectedRowIndex;
         private string SelectedRowString;
         private string SelectedRowStringGrid1;
+        private string SelectedRowRtnDate;
         login parent;       //login타입의 parent 객체 생성
         DBClass dbc = new DBClass();
         public user_main() //매개 변수없는 기본생성자
@@ -114,15 +116,22 @@ namespace 도서대출관리시스템
                 DialogResult rtyes = MessageBox.Show("해당 도서를 대여하시겠습니까?", "확인", MessageBoxButtons.YesNo);
                 if (rtyes == DialogResult.Yes)
                 {
-                    lentsql = "Update book Set bo_user = '" + param + "', bo_lent_date = sysdate, bo_rtndate = sysdate+7 where bo_no = '" + SelectedRowIndex + "'";
-                    dbc.DCom.CommandText = lentsql;
-                    dbc.DCom.ExecuteNonQuery();
-                    dbc.DA.SelectCommand = dbc.DCom;
-                    dbc.DA.Fill(dbc.DS, "lent");
-                    dbc.DS.Tables["lent"].Clear();
-                    dbc.DA.Fill(dbc.DS, "lent");
-                    list_search("");
-                    lentlist();
+                    if (overduebool == true)
+                    {
+                        MessageBox.Show("연체되고 있는 도서가 있어 대여기능이 제공되지 않습니다. 관리자에게 문의하세요.");
+                        return;
+                    } else
+                    {
+                        lentsql = "Update book Set bo_user = '" + param + "', bo_lent_date = sysdate, bo_rtndate = sysdate+7 where bo_no = '" + SelectedRowIndex + "'";
+                        dbc.DCom.CommandText = lentsql;
+                        dbc.DCom.ExecuteNonQuery();
+                        dbc.DA.SelectCommand = dbc.DCom;
+                        dbc.DA.Fill(dbc.DS, "lent");
+                        dbc.DS.Tables["lent"].Clear();
+                        dbc.DA.Fill(dbc.DS, "lent");
+                        list_search("");
+                        lentlist();
+                    }
                 }
                 else
                 {
@@ -137,23 +146,33 @@ namespace 도서대출관리시스템
         }
         private void button2_Click(object sender, EventArgs e) //반납 버튼
         {
+            DateTime nowDate = DateTime.Now;
+            DateTime rtnDate = Convert.ToDateTime(SelectedRowRtnDate);
             DialogResult rtyes = MessageBox.Show("해당 도서를 반납하시겠습니까?", "확인", MessageBoxButtons.YesNo);
             if (rtyes == DialogResult.Yes)
             {
-                lentsql = "insert into lent(lent_no, lent_bo_nm, lent_user, lent_date, lent_rtndate) select seq_lent.NEXTVAL, bo_nm, bo_user, bo_lent_date, bo_rtndate from book where bo_nm ='" + SelectedRowString+ "'";
-                dbc.DCom.CommandText = lentsql;
-                dbc.DCom.ExecuteNonQuery();
-                dbc.DA.SelectCommand = dbc.DCom;
+                if(DateTime.Compare(nowDate.Date, rtnDate.Date) > 0)
+                {
+                    MessageBox.Show("반납기일이 지난 대여건수입니다. 관리자에 문의하여주시기 바랍니다.");
+                    return;
+                } else
+                {
+                    lentsql = "insert into lent(lent_no, lent_bo_nm, lent_user, lent_date, lent_rtndate) select seq_lent.NEXTVAL, bo_nm, bo_user, bo_lent_date, bo_rtndate from book where bo_nm ='" + SelectedRowString + "'";
+                    dbc.DCom.CommandText = lentsql;
+                    dbc.DCom.ExecuteNonQuery();
+                    dbc.DA.SelectCommand = dbc.DCom;
 
-                rtnsql = "update book set bo_user = null, bo_lent_date = null, bo_rtndate = null where bo_nm = '" + SelectedRowString + "'";
-                dbc.DCom.CommandText = rtnsql;
-                dbc.DCom.ExecuteNonQuery();
-                dbc.DA.SelectCommand = dbc.DCom;
-                dbc.DA.Fill(dbc.DS, "lent");
-                dbc.DS.Tables["lent"].Clear();
-                dbc.DA.Fill(dbc.DS, "lent");
-                list_search("");
-                lentlist();
+                    rtnsql = "update book set bo_user = null, bo_lent_date = null, bo_rtndate = null where bo_nm = '" + SelectedRowString + "'";
+                    dbc.DCom.CommandText = rtnsql;
+                    dbc.DCom.ExecuteNonQuery();
+                    dbc.DA.SelectCommand = dbc.DCom;
+                    dbc.DA.Fill(dbc.DS, "lent");
+                    dbc.DS.Tables["lent"].Clear();
+                    dbc.DA.Fill(dbc.DS, "lent");
+                    list_search("");
+                    lentlist();
+                }
+                
             }
             else
             {
@@ -162,18 +181,27 @@ namespace 도서대출관리시스템
         }
         private void button4_Click(object sender, EventArgs e) //연기 버튼 클릭
         {
+            DateTime nowDate = DateTime.Now;
+            DateTime rtnDate = Convert.ToDateTime(SelectedRowRtnDate);
             DialogResult rtyes = MessageBox.Show("해당 도서 대여를 연장하시겠습니까?", "확인", MessageBoxButtons.YesNo);
             if (rtyes == DialogResult.Yes)
             {
-                rtnsql = "update book set bo_rtndate = bo_rtndate + 7 where bo_nm = '" + SelectedRowString + "'";
-                dbc.DCom.CommandText = rtnsql;
-                dbc.DCom.ExecuteNonQuery();
-                dbc.DA.SelectCommand = dbc.DCom;
-                dbc.DA.Fill(dbc.DS, "lent");
-                dbc.DS.Tables["lent"].Clear();
-                dbc.DA.Fill(dbc.DS, "lent");
-                list_search("");
-                lentlist();
+                if (DateTime.Compare(nowDate.Date, rtnDate.Date) > 0)
+                {
+                    MessageBox.Show("반납기일이 지난 대여건수입니다. 관리자에 문의하여주시기 바랍니다.");
+                    return;
+                } else
+                {
+                    rtnsql = "update book set bo_rtndate = bo_rtndate + 7 where bo_nm = '" + SelectedRowString + "'";
+                    dbc.DCom.CommandText = rtnsql;
+                    dbc.DCom.ExecuteNonQuery();
+                    dbc.DA.SelectCommand = dbc.DCom;
+                    dbc.DA.Fill(dbc.DS, "lent");
+                    dbc.DS.Tables["lent"].Clear();
+                    dbc.DA.Fill(dbc.DS, "lent");
+                    list_search("");
+                    lentlist();
+                }
             }
             else
             {
@@ -227,8 +255,15 @@ namespace 도서대출관리시스템
             label6.Text = currRow[1].ToString();
             label7.Text = currRow[2].ToString();
             label8.Text = currRow[1].ToString();
+            if(currRow[4].Equals("0")) {
+                label11.Text = "";
+                overduebool = false;
+            } else
+            {
+                overduebool = true;
+                label11.Text = "[연체]";
+            }
         }
-
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e) //셀 클릭하여 특정 데이터값 추출
         {
             SelectedRowStringGrid1 = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString(); //내가 선택한 행의 5번째 열의 값 추출
@@ -277,6 +312,7 @@ namespace 도서대출관리시스템
                 }
                 DataRow currRow = lentTable.Rows[e.RowIndex];
                 SelectedRowString = currRow["bo_nm"].ToString();
+                SelectedRowRtnDate = currRow["TO_CHAR(bo_rtndate,'yyyy/mm/dd')"].ToString();
             }
             catch (DataException DE)
             {

@@ -48,6 +48,7 @@ namespace 도서대출관리시스템
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -209,6 +210,7 @@ namespace 도서대출관리시스템
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.dataGridView2);
             this.groupBox2.Location = new System.Drawing.Point(437, 125);
             this.groupBox2.Name = "groupBox2";
@@ -217,14 +219,25 @@ namespace 도서대출관리시스템
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "연체 회원 목록";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(329, 183);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(81, 21);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "연체 초기화";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Location = new System.Drawing.Point(6, 21);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.Size = new System.Drawing.Size(404, 177);
+            this.dataGridView2.Size = new System.Drawing.Size(404, 160);
             this.dataGridView2.TabIndex = 10;
+            this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
             // 
             // admin_user_management
             // 
@@ -282,5 +295,6 @@ namespace 도서대출관리시스템
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.ToolStripMenuItem 재고관리ToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
     }
 }
