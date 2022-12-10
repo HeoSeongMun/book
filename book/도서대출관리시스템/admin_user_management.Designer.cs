@@ -47,9 +47,7 @@ namespace 도서대출관리시스템
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -180,7 +178,7 @@ namespace 도서대출관리시스템
             this.dataGridView1.Location = new System.Drawing.Point(6, 20);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(404, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(404, 178);
             this.dataGridView1.TabIndex = 10;
             // 
             // textBox4
@@ -202,7 +200,6 @@ namespace 도서대출관리시스템
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dataGridView1);
-            this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Location = new System.Drawing.Point(12, 125);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(419, 210);
@@ -210,18 +207,8 @@ namespace 도서대출관리시스템
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "회원 목록";
             // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(360, 176);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(50, 21);
-            this.button4.TabIndex = 15;
-            this.button4.Text = "연체";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button5);
             this.groupBox2.Controls.Add(this.dataGridView2);
             this.groupBox2.Location = new System.Drawing.Point(437, 125);
             this.groupBox2.Name = "groupBox2";
@@ -230,22 +217,13 @@ namespace 도서대출관리시스템
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "연체 회원 목록";
             // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(360, 177);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(50, 21);
-            this.button5.TabIndex = 16;
-            this.button5.Text = "삭제";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Location = new System.Drawing.Point(6, 21);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.Size = new System.Drawing.Size(404, 150);
+            this.dataGridView2.Size = new System.Drawing.Size(404, 177);
             this.dataGridView2.TabIndex = 10;
             // 
             // admin_user_management
@@ -301,9 +279,7 @@ namespace 도서대출관리시스템
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.ToolStripMenuItem 재고관리ToolStripMenuItem;
     }

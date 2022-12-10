@@ -47,8 +47,6 @@ namespace 도서대출관리시스템
             list_search(""); //도서 목록 출력
             lentlist(); //대여 목록 출력
             idSelect(); //로그인한 유저 신상정보 출력
-            this.Left = 0;
-            this.Top = 0;
         }
         public void sql_execute(String sqlstr, DataSet dsstr)    //도서 목록 실행
         {
@@ -142,7 +140,7 @@ namespace 도서대출관리시스템
             DialogResult rtyes = MessageBox.Show("해당 도서를 반납하시겠습니까?", "확인", MessageBoxButtons.YesNo);
             if (rtyes == DialogResult.Yes)
             {
-                lentsql = "insert into lent(lent_bo_no, bo_nm, lent_user, bo_lent_date, bo_rtndate) select seq_lent.NEXTVAL, bo_nm, bo_user, bo_lent_date, bo_rtndate from book where bo_nm ='" + SelectedRowString+ "'";
+                lentsql = "insert into lent(lent_no, lent_bo_nm, lent_user, lent_date, lent_rtndate) select seq_lent.NEXTVAL, bo_nm, bo_user, bo_lent_date, bo_rtndate from book where bo_nm ='" + SelectedRowString+ "'";
                 dbc.DCom.CommandText = lentsql;
                 dbc.DCom.ExecuteNonQuery();
                 dbc.DA.SelectCommand = dbc.DCom;
@@ -288,10 +286,6 @@ namespace 도서대출관리시스템
             {
                 MessageBox.Show(DE.Message);
             }
-        }
-
-        public void insert_lent() // 대출시 lent 테이블 insert 쿼리문 
-        {
         }
     }
 }

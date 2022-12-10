@@ -263,6 +263,7 @@ namespace 도서대출관리시스템
             this.label10.Size = new System.Drawing.Size(77, 20);
             this.label10.TabIndex = 9;
             this.label10.Text = "연체 회원 : ";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // label11
             // 

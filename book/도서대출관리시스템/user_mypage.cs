@@ -23,13 +23,13 @@ namespace 도서대출관리시스템
         string dt2;
         public user_mypage()
         {
-            InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
+            InitializeComponent();
         }
         public user_mypage(user_main user_main)
         {
-            InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
+            InitializeComponent();
             parent = user_main;
         }
 
@@ -75,17 +75,17 @@ namespace 도서대출관리시스템
         {
             if (Find == "")
             {
-                lentsql = "select bo_nm, TO_CHAR(bo_lent_date,'yyyy/mm/dd'), TO_CHAR(bo_rtndate,'yyyy/mm/dd') from lent where lent_user = '" + param + "' ORDER BY lent_bo_no ASC";   // 정렬
+                lentsql = "select lent_bo_nm, TO_CHAR(lent_date,'yyyy/mm/dd'), TO_CHAR(lent_rtndate,'yyyy/mm/dd') from lent where lent_user = '" + param + "' ORDER BY lent_no ASC";   // 정렬
                 sql_execute(lentsql, dbc.DS);
             }
             else if (Find != "")
             {
-                lentsql = "select bo_nm, TO_CHAR(bo_lent_date,'yyyy/mm/dd'), TO_CHAR(bo_rtndate,'yyyy/mm/dd') from lent where bo_nm Like '%" + Find + "%'";   // 찾기
+                lentsql = "select lent_bo_nm, TO_CHAR(lent_date,'yyyy/mm/dd'), TO_CHAR(lent_rtndate,'yyyy/mm/dd') from lent where lent_user = '" + param + "' and lent_bo_nm Like '%" + Find + "%'";   // 찾기
                 sql_execute(lentsql, dbc.DS);
                 if (dbc.DS.Tables["lent"].Rows.Count == 0)
                 {
                     MessageBox.Show("해당 도서가 없습니다.");
-                    lentsql = "select bo_nm, TO_CHAR(bo_lent_date,'yyyy/mm/dd'), TO_CHAR(bo_rtndate,'yyyy/mm/dd') from lent where lent_user = '" + param + "' ORDER BY lent_bo_no ASC";
+                    lentsql = "select lent_bo_nm, TO_CHAR(lent_date,'yyyy/mm/dd'), TO_CHAR(lent_rtndate,'yyyy/mm/dd') from lent where lent_user = '" + param + "' ORDER BY lent_no ASC";
                     sql_execute(lentsql, dbc.DS);
                 }
             }
@@ -107,7 +107,7 @@ namespace 도서대출관리시스템
         }
         private void button3_Click(object sender, EventArgs e) //날짜 검색 버튼
         {
-            lentsql = "select bo_nm, TO_CHAR(bo_lent_date,'yyyy/mm/dd'), TO_CHAR(bo_rtndate,'yyyy/mm/dd') from lent where TO_CHAR(bo_lent_date,'yyyy-mm-dd') >= '" + dt1 + "' and TO_CHAR(bo_lent_date,'yyyy-mm-dd') <= '" + dt2 + "'"; // 찾기
+            lentsql = "select lent_bo_nm, TO_CHAR(lent_date,'yyyy/mm/dd'), TO_CHAR(lent_rtndate,'yyyy/mm/dd') from lent where lent_user = '" + param + "' and TO_CHAR(lent_date,'yyyy-mm-dd') >= '" + dt1 + "' and TO_CHAR(lent_date,'yyyy-mm-dd') <= '" + dt2 + "'"; // 찾기
             sql_execute(lentsql, dbc.DS);
         }
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)

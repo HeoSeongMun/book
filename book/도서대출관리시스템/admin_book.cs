@@ -16,8 +16,8 @@ namespace 도서대출관리시스템
         private int SelectedRowIndex;
         public admin_book()
         {
-            InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
+            InitializeComponent();
             dbc.DB_ObjCreate();
             dbc.DB_Open();
             dbc.DB_Access();

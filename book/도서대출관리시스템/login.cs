@@ -19,8 +19,8 @@ namespace 도서대출관리시스템
         DBClass dbc = new DBClass();  //*****DBClass 객체 생성
         public login()
         {
-            InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
+            InitializeComponent();
             dbc.DB_ObjCreate();
             dbc.DB_Open();
             dbc.DB_Access();

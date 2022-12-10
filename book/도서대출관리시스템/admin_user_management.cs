@@ -20,8 +20,8 @@ namespace 도서대출관리시스템
         DBClass dbc = new DBClass();
         public admin_user_management()
         {
-            InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
+            InitializeComponent();
             dbc.DB_ObjCreate();
             dbc.DB_Open();
             dbc.DB_Access();
@@ -31,8 +31,6 @@ namespace 도서대출관리시스템
         {
             userlist(); //대여 목록 출력
             overlist();
-            this.Left = 0;
-            this.Top = 0;
         }
         private void ClearTextBoxes()
         {

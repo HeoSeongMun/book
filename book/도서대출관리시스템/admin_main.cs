@@ -20,11 +20,11 @@ namespace 도서대출관리시스템
         string lentmemsql;
         public admin_main()
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             dbc.DB_ObjCreate();
             dbc.DB_Open();
             dbc.DB_Access();
-            this.StartPosition = FormStartPosition.CenterScreen;
         }
         private void admin_main_Load(object sender, EventArgs e)
         {
@@ -238,6 +238,11 @@ namespace 도서대출관리시스템
             this.Visible = false;
             admin_stock admin_Stock = new admin_stock();
             admin_Stock.ShowDialog();
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
