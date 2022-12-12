@@ -116,7 +116,7 @@ namespace 도서대출관리시스템
                 DialogResult rtyes = MessageBox.Show("해당 도서를 대여하시겠습니까?", "확인", MessageBoxButtons.YesNo);
                 if (rtyes == DialogResult.Yes)
                 {
-                    if (overduebool == true)
+                    if (overduebool == false)
                     {
                         MessageBox.Show("연체되고 있는 도서가 있어 대여기능이 제공되지 않습니다. 관리자에게 문의하세요.");
                         return;
@@ -255,12 +255,12 @@ namespace 도서대출관리시스템
             label6.Text = currRow[1].ToString();
             label7.Text = currRow[2].ToString();
             label8.Text = currRow[1].ToString();
-            if(currRow[4].Equals("0")) {
-                label11.Text = "";
-                overduebool = false;
+            if (currRow.IsNull(4)) {
+                label11.Text = " ";
+                overduebool = true;
             } else
             {
-                overduebool = true;
+                overduebool = false;
                 label11.Text = "[연체]";
             }
         }

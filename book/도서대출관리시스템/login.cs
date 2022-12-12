@@ -50,7 +50,7 @@ namespace 도서대출관리시스템
             dbc.DA.Fill(dbc.DS, "usinf");
             if (dbc.DS.Tables["usinf"].Rows.Count == 0)
             {
-                MessageBox.Show("등록되지 않은 회원입니다.");
+                MessageBox.Show("등록되지 않은 회원 또는 비밀번호가 맞지 않습니다.");
                 textBox3.Text = "";
                 textBox3.Focus();
             }

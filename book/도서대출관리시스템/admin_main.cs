@@ -55,6 +55,7 @@ namespace 도서대출관리시스템
             odmemcnt();
             lentgridview();
             overdue_update();
+            overduelist();
         }
         public void booklist()
         {
@@ -271,6 +272,24 @@ namespace 도서대출관리시스템
                 return;
             }
         }
+        public void overduelist()
+        {
+            overduesql = "select sum(user_overdue)*1500 from usinf";
+            sql_execute9(overduesql, dbc.DS);
+        }
+
+        public void sql_execute9(String sqlstr, DataSet dsstr)
+        {
+            dbc.DCom.CommandText = sqlstr;
+            dbc.DA.SelectCommand = dbc.DCom;
+            dbc.DA.Fill(dsstr, "overdue");
+            dsstr.Tables["overdue"].Clear();
+            dbc.DA.Fill(dsstr, "overdue");
+            DataRow currRow = dsstr.Tables["overdue"].Rows[0];
+
+            label12.Text = currRow[0].ToString() + "원";
+        }
+
         private void 도서관리ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Visible = false;
@@ -296,11 +315,6 @@ namespace 도서대출관리시스템
             this.Visible = false;
             admin_stock admin_Stock = new admin_stock();
             admin_Stock.ShowDialog();
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)

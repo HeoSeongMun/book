@@ -15,7 +15,7 @@ namespace 도서대출관리시스템
         //수정하거나 삭제하기 위해 선택된 행의 인덱스를 저장한다.
         private int SelectedRowIndex;
         private string SelectedRowString;
-
+        int total_overpay=0;
         string usersql;
         string oversql;
         string cancelodsql;
@@ -204,7 +204,7 @@ namespace 도서대출관리시스템
             DialogResult rtyes = MessageBox.Show("해당 사용자의 연체 상태를 해제하시겠습니까?", "확인", MessageBoxButtons.YesNo);
             if (rtyes == DialogResult.Yes)
             {
-                cancelodsql = "update usinf set user_overdue = '0' where user_id = '" + SelectedRowString + "'";
+                cancelodsql = "update usinf set user_overdue = null where user_id = '" + SelectedRowString + "'";
                 dbc.DCom.CommandText = cancelodsql;
                 dbc.DCom.ExecuteNonQuery();
                 dbc.DA.SelectCommand = dbc.DCom;
