@@ -213,7 +213,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.Name = "admin_stock";
-            this.Text = "관리자 - 재고관리";
+            this.Text = "관리자 - 주문관리";
             this.Load += new System.EventHandler(this.admin_stock_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
