@@ -105,100 +105,6 @@ namespace 도서대출관리시스템
             over_header();
         }
 
-        private void AppendBtn_Click(object sender, EventArgs e)    // 추가 버튼
-        {
-            try
-            {
-                DataTable bookTable = dbc.DS.Tables["usinf"];
-                bookTable = dbc.DS.Tables["usinf"];//*
-                DataRow newRow = bookTable.NewRow();
-                newRow["user_id"] = Convert.ToInt32(textBox1.Text);
-                newRow["user_nm"] = textBox2.Text;
-                newRow["user_tel"] = textBox3.Text;
-                newRow["user_pw"] = textBox4.Text;
-                bookTable.Rows.Add(newRow);
-                dbc.DA.Update(dbc.DS, "usinf");
-                dbc.DS.AcceptChanges();//*
-                ClearTextBoxes();  //*
-                dataGridView1.DataSource = dbc.DS.Tables["usinf"].DefaultView;
-            }
-            catch (DataException DE)
-            {
-                MessageBox.Show(DE.Message);
-            }
-            catch (Exception DE)
-            {
-                MessageBox.Show(DE.Message);
-            }
-        }
-        private void DeleteBtn_Click(object sender, EventArgs e)    // 삭제 버튼
-        {
-            try
-            {
-                DataTable bookTable = dbc.DS.Tables["usinf"];
-                bookTable = dbc.DS.Tables["usinf"];
-                DataColumn[] PrimaryKey = new DataColumn[1];
-                PrimaryKey[0] = bookTable.Columns["user_id"];
-                bookTable.PrimaryKey = PrimaryKey;
-
-                DataRow currRow = bookTable.Rows.Find(SelectedRowIndex);
-                currRow.Delete();
-
-                dbc.DA.Update(dbc.DS.GetChanges(DataRowState.Deleted), "usinf");
-                dataGridView1.DataSource = dbc.DS.Tables["usinf"].DefaultView;
-            }
-            catch (DataException DE)
-            {
-                MessageBox.Show(DE.Message);
-            }
-            catch (Exception DE)
-            {
-                MessageBox.Show(DE.Message);
-            }
-        }
-        private void UpdateBtn_Click(object sender, EventArgs e)    // 수정 버튼
-        {
-            try
-            {
-                DataTable bookTable = dbc.DS.Tables["usinf"];
-                bookTable = dbc.DS.Tables["usinf"];//*
-                DataColumn[] PrimaryKey = new DataColumn[1];
-                PrimaryKey[0] = bookTable.Columns["user_id"];
-                bookTable.PrimaryKey = PrimaryKey;
-
-                DataRow currRow = bookTable.Rows.Find(SelectedRowIndex);
-
-
-                currRow.BeginEdit();
-                currRow["user_id"] = textBox1.Text;
-                currRow["user_nm"] = textBox2.Text;
-                currRow["user_tel"] = textBox3.Text;
-                currRow["user_pw"] = textBox4.Text;
-                currRow.EndEdit();
-
-                DataSet UpdatedSet = dbc.DS.GetChanges(DataRowState.Modified);
-                if (UpdatedSet.HasErrors)
-                {
-                    MessageBox.Show("변경된 데이터에 문제가 있습니다.");
-                }
-                else
-                {
-                    dbc.DA.Update(UpdatedSet, "usinf");
-                    dbc.DS.AcceptChanges();
-                }
-
-                dataGridView1.DataSource = dbc.DS.Tables["usinf"].DefaultView;
-
-            }
-            catch (DataException DE)
-            {
-                MessageBox.Show(DE.Message);
-            }
-            catch (Exception DE)
-            {
-                MessageBox.Show(DE.Message);
-            }
-        }
         private void button1_Click(object sender, EventArgs e) //연체 초기화 버튼
         {
             DialogResult rtyes = MessageBox.Show("해당 사용자의 연체 상태를 해제하시겠습니까?", "확인", MessageBoxButtons.YesNo);
@@ -217,39 +123,6 @@ namespace 도서대출관리시스템
             else
             {
                 return;
-            }
-        }
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)    // 그리드뷰 셀 선택
-        {
-            try
-            {
-                DataTable usinfTable = dbc.DS.Tables["usinf"];
-                if (e.RowIndex < 0)
-                {
-                    // DBGrid의 컬럼 헤더를 클릭하면 컬럼을 정렬하므로
-                    // 아무 메시지도 띄우지 않습니다.
-                    return;
-                }
-                else if (e.RowIndex > usinfTable.Rows.Count - 1)
-                {
-                    MessageBox.Show("해당하는 데이터가 존재하지 않습니다.");
-                    return;
-                }
-
-                DataRow currRow = usinfTable.Rows[e.RowIndex];
-                textBox1.Text = currRow["user_id"].ToString();
-                textBox2.Text = currRow["user_nm"].ToString();
-                textBox3.Text = currRow["user_tel"].ToString();
-                textBox4.Text = currRow["user_pw"].ToString();
-                SelectedRowIndex = Convert.ToInt32(currRow["user_id"]);
-            }
-            catch (DataException DE)
-            {
-                MessageBox.Show(DE.Message);
-            }
-            catch (Exception DE)
-            {
-                MessageBox.Show(DE.Message);
             }
         }
         private void 홈ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -292,6 +165,137 @@ namespace 도서대출관리시스템
                 }
                 DataRow currRow = lentTable.Rows[e.RowIndex];
                 SelectedRowString = currRow["user_id"].ToString();
+            }
+            catch (DataException DE)
+            {
+                MessageBox.Show(DE.Message);
+            }
+            catch (Exception DE)
+            {
+                MessageBox.Show(DE.Message);
+            }
+        }
+
+        private void AppendBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataTable bookTable = dbc.DS.Tables["usinf"];
+                bookTable = dbc.DS.Tables["usinf"];//*
+                DataRow newRow = bookTable.NewRow();
+                newRow["user_id"] = Convert.ToInt32(textBox1.Text);
+                newRow["user_nm"] = textBox2.Text;
+                newRow["user_tel"] = textBox3.Text;
+                newRow["user_pw"] = textBox4.Text;
+                bookTable.Rows.Add(newRow);
+                dbc.DA.Update(dbc.DS, "usinf");
+                dbc.DS.AcceptChanges();//*
+                ClearTextBoxes();  //*
+                dataGridView1.DataSource = dbc.DS.Tables["usinf"].DefaultView;
+            }
+            catch (DataException DE)
+            {
+                MessageBox.Show(DE.Message);
+            }
+            catch (Exception DE)
+            {
+                MessageBox.Show(DE.Message);
+            }
+        }
+
+        private void UpdateBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataTable bookTable = dbc.DS.Tables["usinf"];
+                bookTable = dbc.DS.Tables["usinf"];//*
+                DataColumn[] PrimaryKey = new DataColumn[1];
+                PrimaryKey[0] = bookTable.Columns["user_id"];
+                bookTable.PrimaryKey = PrimaryKey;
+
+                DataRow currRow = bookTable.Rows.Find(SelectedRowIndex);
+
+
+                currRow.BeginEdit();
+                currRow["user_id"] = textBox1.Text;
+                currRow["user_nm"] = textBox2.Text;
+                currRow["user_tel"] = textBox3.Text;
+                currRow["user_pw"] = textBox4.Text;
+                currRow.EndEdit();
+
+                DataSet UpdatedSet = dbc.DS.GetChanges(DataRowState.Modified);
+                if (UpdatedSet.HasErrors)
+                {
+                    MessageBox.Show("변경된 데이터에 문제가 있습니다.");
+                }
+                else
+                {
+                    dbc.DA.Update(UpdatedSet, "usinf");
+                    dbc.DS.AcceptChanges();
+                }
+
+                dataGridView1.DataSource = dbc.DS.Tables["usinf"].DefaultView;
+
+            }
+            catch (DataException DE)
+            {
+                MessageBox.Show(DE.Message);
+            }
+            catch (Exception DE)
+            {
+                MessageBox.Show(DE.Message);
+            }
+        }
+
+        private void DeleteBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataTable bookTable = dbc.DS.Tables["usinf"];
+                bookTable = dbc.DS.Tables["usinf"];
+                DataColumn[] PrimaryKey = new DataColumn[1];
+                PrimaryKey[0] = bookTable.Columns["user_id"];
+                bookTable.PrimaryKey = PrimaryKey;
+
+                DataRow currRow = bookTable.Rows.Find(SelectedRowIndex);
+                currRow.Delete();
+
+                dbc.DA.Update(dbc.DS.GetChanges(DataRowState.Deleted), "usinf");
+                dataGridView1.DataSource = dbc.DS.Tables["usinf"].DefaultView;
+            }
+            catch (DataException DE)
+            {
+                MessageBox.Show(DE.Message);
+            }
+            catch (Exception DE)
+            {
+                MessageBox.Show(DE.Message);
+            }
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                DataTable usinfTable = dbc.DS.Tables["usinf"];
+                if (e.RowIndex < 0)
+                {
+                    // DBGrid의 컬럼 헤더를 클릭하면 컬럼을 정렬하므로
+                    // 아무 메시지도 띄우지 않습니다.
+                    return;
+                }
+                else if (e.RowIndex > usinfTable.Rows.Count - 1)
+                {
+                    MessageBox.Show("해당하는 데이터가 존재하지 않습니다.");
+                    return;
+                }
+
+                DataRow currRow = usinfTable.Rows[e.RowIndex];
+                textBox1.Text = currRow["user_id"].ToString();
+                textBox2.Text = currRow["user_nm"].ToString();
+                textBox3.Text = currRow["user_tel"].ToString();
+                textBox4.Text = currRow["user_pw"].ToString();
+                SelectedRowIndex = Convert.ToInt32(currRow["user_id"]);
             }
             catch (DataException DE)
             {

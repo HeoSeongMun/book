@@ -42,7 +42,7 @@ namespace 도서대출관리시스템
                 MessageBox.Show("ID 또는 Passwrd를 입력하세요");
                 return;
             }
-            sqlstr = "Select user_id, user_pw From usinf Where user_id ='" + textBox2.Text + "'and user_pw ='" + textBox3.Text + "'";
+            sqlstr = "Select user_id, user_pw From usinf Where user_id ='" + textBox2.Text + "' and user_pw ='" + textBox3.Text + "'";
             dbc.DCom.CommandText = sqlstr;
             dbc.DA.SelectCommand = dbc.DCom;
             dbc.DA.Fill(dbc.DS, "usinf");
@@ -75,7 +75,7 @@ namespace 도서대출관리시스템
                 MessageBox.Show("ID 또는 Passwrd를 입력하세요");
                 return;
             }
-                sqlstr = "Select adm_nm,adm_pwd From adm Where adm_nm ='" + textBox2.Text + "'and adm_pwd ='" + textBox3.Text + "'";
+                sqlstr = "Select adm_nm, adm_pwd From adm Where adm_nm ='" + textBox2.Text + "' and adm_pwd ='" + textBox3.Text + "'";
                 dbc.DCom.CommandText = sqlstr;
                 dbc.DA.SelectCommand = dbc.DCom;
                 dbc.DA.Fill(dbc.DS, "adm");

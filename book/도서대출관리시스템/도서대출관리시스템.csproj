@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>도서대출관리시스템</RootNamespace>
     <AssemblyName>도서대출관리시스템</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
